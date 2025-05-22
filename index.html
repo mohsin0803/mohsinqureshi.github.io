@@ -1,28 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coming Soon</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohsin Qureshi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #f0f0f0;
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 20vh;
-    }
-    h1 {
-      font-size: 3rem;
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background: #f7f9fc;
       color: #333;
     }
-    p {
-      font-size: 1.5rem;
-      color: #666;
+
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #4a90e2;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    .code-block {
+      background: #eee;
+      padding: 1rem;
+      font-family: 'Source Code Pro', monospace;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Coming Soon</h1>
-  <p>mohsinqureshi.ca is under construction. Check back later!</p>
+  <header>
+    <h1>Mohsin Qureshi</h1>
+    <p>Data Science Enthusiast | Python Developer | Tech Explorer</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>About Me</h2>
+      <p>
+        Hello! I’m Mohsin, passionate about turning data into insights. I enjoy building
+        projects using Python, FastAPI, and working with data from real-world applications.
+      </p>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <ul>
+        <li><strong>StockSync:</strong> FastAPI app for syncing stock data between Omni & EL</li>
+        <li><strong>KlaviyoSync:</strong> Customer & Product sync integration with Klaviyo</li>
+        <li><strong>ZohoBridge:</strong> Django app for posting data to Zoho Inventory API</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:me@mohsinqureshi.ca">me@mohsinqureshi.ca</a></p>
+      <p>GitHub: <a href="https://github.com/mohsin0803" target="_blank">mohsin0803</a></p>
+    </section>
+
+    <section>
+      <h2>Sample Code</h2>
+      <div class="code-block">
+<pre><code>from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Mohsin Qureshi. All rights reserved.
+  </footer>
 </body>
 </html>
+
