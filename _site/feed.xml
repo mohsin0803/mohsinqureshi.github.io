@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-07T16:47:35-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Mohsin Qureshi</title><subtitle>Welcome to my personal website. I write about technology, share my projects, and more.</subtitle><entry><title type="html">Getting Started with FastAPI: Building High-Performance APIs</title><link href="http://localhost:4000/web%20development/python/apis/2023/06/15/getting-started-with-fastapi.html" rel="alternate" type="text/html" title="Getting Started with FastAPI: Building High-Performance APIs" /><published>2023-06-15T14:30:00-04:00</published><updated>2023-06-15T14:30:00-04:00</updated><id>http://localhost:4000/web%20development/python/apis/2023/06/15/getting-started-with-fastapi</id><content type="html" xml:base="http://localhost:4000/web%20development/python/apis/2023/06/15/getting-started-with-fastapi.html"><![CDATA[<h1 id="getting-started-with-fastapi-building-high-performance-apis">Getting Started with FastAPI: Building High-Performance APIs</h1>
+
+<p>FastAPI is a modern, fast (high-performance) web framework for building APIs with Python 3.7+ based on standard Python type hints. In this tutorial, we’ll explore the key features of FastAPI and build a simple yet powerful API.</p>
+
+<h2 id="why-fastapi">Why FastAPI?</h2>
+
+<ul>
+  <li><strong>Fast</strong>: Very high performance, on par with NodeJS and Go (thanks to Starlette and Pydantic)</li>
+  <li><strong>Fast to code</strong>: Increase the speed to develop features by about 200% to 300%</li>
+  <li><strong>Fewer bugs</strong>: Reduce about 40% of human (developer) induced errors</li>
+  <li><strong>Intuitive</strong>: Great editor support with autocompletion and type checks</li>
+  <li><strong>Easy</strong>: Designed to be easy to use and learn, less time reading docs</li>
+  <li><strong>Short</strong>: Minimize code duplication with multiple features from each parameter declaration</li>
+  <li><strong>Robust</strong>: Get production-ready code with automatic interactive documentation</li>
+  <li><strong>Standards-based</strong>: Based on (and fully compatible with) the open standards for APIs: OpenAPI and JSON Schema</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+
+<p>Before we start, let’s set up our development environment. First, create a new virtual environment and install FastAPI and Uvicorn (ASGI server):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a new virtual environment</span>
+python <span class="nt">-m</span> venv venv
+
+<span class="c"># Activate the virtual environment</span>
+<span class="c"># On Windows:</span>
+.<span class="se">\v</span><span class="nb">env</span><span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+<span class="c"># On macOS/Linux:</span>
+<span class="nb">source </span>venv/bin/activate
+
+<span class="c"># Install FastAPI and Uvicorn</span>
+pip <span class="nb">install </span>fastapi uvicorn[standard]
+</code></pre></div></div>
+
+<h2 id="your-first-fastapi-application">Your First FastAPI Application</h2>
+
+<p>Let’s create a simple “Hello World” API. Create a new file called <code class="language-plaintext highlighter-rouge">main.py</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_root</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">"message"</span><span class="p">:</span> <span class="s">"Welcome to FastAPI!"</span><span class="p">}</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/items/{item_id}"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_item</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">"item_id"</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span> <span class="s">"q"</span><span class="p">:</span> <span class="n">q</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>To run the application, use the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uvicorn main:app <span class="nt">--reload</span>
+</code></pre></div></div>
+
+<p>Now, open your browser and go to <code class="language-plaintext highlighter-rouge">http://127.0.0.1:8000/</code>. You should see the JSON response:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Welcome to FastAPI!"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can also access the automatic interactive API documentation at:</p>
+<ul>
+  <li>Swagger UI: <code class="language-plaintext highlighter-rouge">http://127.0.0.1:8000/docs</code></li>
+  <li>ReDoc: <code class="language-plaintext highlighter-rouge">http://127.0.0.1:8000/redoc</code></li>
+</ul>
+
+<h2 id="path-parameters-and-query-parameters">Path Parameters and Query Parameters</h2>
+
+<p>FastAPI makes it easy to work with both path parameters and query parameters:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="c1"># Path parameter with type
+</span><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/items/{item_id}"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_item</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">"item_id"</span><span class="p">:</span> <span class="n">item_id</span><span class="p">}</span>
+
+<span class="c1"># Query parameters with defaults
+</span><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/items/"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">list_items</span><span class="p">(</span><span class="n">skip</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">"skip"</span><span class="p">:</span> <span class="n">skip</span><span class="p">,</span> <span class="s">"limit"</span><span class="p">:</span> <span class="n">limit</span><span class="p">}</span>
+
+<span class="c1"># Combined path and query parameters
+</span><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/users/{user_id}/items/{item_id}"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_user_item</span><span class="p">(</span>
+    <span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+    <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+    <span class="n">q</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> 
+    <span class="n">short</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="p">):</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="s">"item_id"</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span> <span class="s">"owner_id"</span><span class="p">:</span> <span class="n">user_id</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">q</span><span class="p">:</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">update</span><span class="p">({</span><span class="s">"q"</span><span class="p">:</span> <span class="n">q</span><span class="p">})</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">short</span><span class="p">:</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s">"description"</span><span class="p">:</span> <span class="s">"This is a very long description that you only get if you set short to False"</span>
+        <span class="p">})</span>
+    <span class="k">return</span> <span class="n">item</span>
+</code></pre></div></div>
+
+<h2 id="request-body">Request Body</h2>
+
+<p>To handle request bodies, we’ll use Pydantic models:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">tax</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"/items/"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_item</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Item</span><span class="p">):</span>
+    <span class="n">item_dict</span> <span class="o">=</span> <span class="n">item</span><span class="p">.</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">item</span><span class="p">.</span><span class="n">tax</span><span class="p">:</span>
+        <span class="n">price_with_tax</span> <span class="o">=</span> <span class="n">item</span><span class="p">.</span><span class="n">price</span> <span class="o">+</span> <span class="n">item</span><span class="p">.</span><span class="n">tax</span>
+        <span class="n">item_dict</span><span class="p">.</span><span class="n">update</span><span class="p">({</span><span class="s">"price_with_tax"</span><span class="p">:</span> <span class="n">price_with_tax</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">item_dict</span>
+</code></pre></div></div>
+
+<h2 id="error-handling">Error Handling</h2>
+
+<p>FastAPI provides a simple way to handle HTTP exceptions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="n">items</span> <span class="o">=</span> <span class="p">{</span><span class="s">"foo"</span><span class="p">:</span> <span class="s">"The Foo Wrestlers"</span><span class="p">}</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/items/{item_id}"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_item</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">item_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> 
+            <span class="n">detail</span><span class="o">=</span><span class="s">"Item not found"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"X-Error"</span><span class="p">:</span> <span class="s">"There goes my error"</span><span class="p">},</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">"item"</span><span class="p">:</span> <span class="n">items</span><span class="p">[</span><span class="n">item_id</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<h2 id="middleware">Middleware</h2>
+
+<p>You can easily add middleware to your application:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Request</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">middleware</span><span class="p">(</span><span class="s">"http"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">add_process_time_header</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">process_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    <span class="n">response</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="s">"X-Process-Time"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">process_time</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></div>
+
+<h2 id="database-integration">Database Integration</h2>
+
+<p>Here’s how you can integrate with a database using SQLAlchemy:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Depends</span><span class="p">,</span> <span class="n">HTTPException</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span><span class="p">,</span> <span class="n">Session</span>
+
+<span class="c1"># Database setup
+</span><span class="n">SQLALCHEMY_DATABASE_URL</span> <span class="o">=</span> <span class="s">"sqlite:///./test.db"</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">SQLALCHEMY_DATABASE_URL</span><span class="p">,</span> <span class="n">connect_args</span><span class="o">=</span><span class="p">{</span><span class="s">"check_same_thread"</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
+<span class="n">SessionLocal</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">autocommit</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">autoflush</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="c1"># Define a model
+</span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">"users"</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">hashed_password</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">full_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Create tables
+</span><span class="n">Base</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="c1"># Dependency to get DB session
+</span><span class="k">def</span> <span class="nf">get_db</span><span class="p">():</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">SessionLocal</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">db</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">db</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Example route using the database
+</span><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/users/{user_id}"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">read_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">db_user</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">).</span><span class="nb">filter</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="nb">id</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">).</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">db_user</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s">"User not found"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_user</span>
+</code></pre></div></div>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>Here’s a basic example of implementing OAuth2 with JWT tokens:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">Depends</span><span class="p">,</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">fastapi.security</span> <span class="kn">import</span> <span class="n">OAuth2PasswordBearer</span><span class="p">,</span> <span class="n">OAuth2PasswordRequestForm</span>
+<span class="kn">from</span> <span class="nn">jose</span> <span class="kn">import</span> <span class="n">JWTError</span><span class="p">,</span> <span class="n">jwt</span>
+<span class="kn">from</span> <span class="nn">passlib.context</span> <span class="kn">import</span> <span class="n">CryptContext</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="c1"># to get a string like this run:
+# openssl rand -hex 32
+</span><span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s">"your-secret-key-here"</span>
+<span class="n">ALGORITHM</span> <span class="o">=</span> <span class="s">"HS256"</span>
+<span class="n">ACCESS_TOKEN_EXPIRE_MINUTES</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="n">fake_users_db</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"johndoe"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"username"</span><span class="p">:</span> <span class="s">"johndoe"</span><span class="p">,</span>
+        <span class="s">"full_name"</span><span class="p">:</span> <span class="s">"John Doe"</span><span class="p">,</span>
+        <span class="s">"email"</span><span class="p">:</span> <span class="s">"johndoe@example.com"</span><span class="p">,</span>
+        <span class="s">"hashed_password"</span><span class="p">:</span> <span class="s">"$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW"</span><span class="p">,</span>  <span class="c1"># secret
+</span>        <span class="s">"disabled"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Token</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">token_type</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">class</span> <span class="nc">TokenData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">full_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">disabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">class</span> <span class="nc">UserInDB</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+    <span class="n">hashed_password</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="n">pwd_context</span> <span class="o">=</span> <span class="n">CryptContext</span><span class="p">(</span><span class="n">schemes</span><span class="o">=</span><span class="p">[</span><span class="s">"bcrypt"</span><span class="p">],</span> <span class="n">deprecated</span><span class="o">=</span><span class="s">"auto"</span><span class="p">)</span>
+<span class="n">oauth2_scheme</span> <span class="o">=</span> <span class="n">OAuth2PasswordBearer</span><span class="p">(</span><span class="n">tokenUrl</span><span class="o">=</span><span class="s">"token"</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">verify_password</span><span class="p">(</span><span class="n">plain_password</span><span class="p">,</span> <span class="n">hashed_password</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pwd_context</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="n">plain_password</span><span class="p">,</span> <span class="n">hashed_password</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pwd_context</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">db</span><span class="p">:</span>
+        <span class="n">user_dict</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">username</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">UserInDB</span><span class="p">(</span><span class="o">**</span><span class="n">user_dict</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">authenticate_user</span><span class="p">(</span><span class="n">fake_db</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_user</span><span class="p">(</span><span class="n">fake_db</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">verify_password</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">hashed_password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="n">user</span>
+
+<span class="k">def</span> <span class="nf">create_access_token</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">expires_delta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="n">to_encode</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">expires_delta</span><span class="p">:</span>
+        <span class="n">expire</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">expires_delta</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">expire</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">to_encode</span><span class="p">.</span><span class="n">update</span><span class="p">({</span><span class="s">"exp"</span><span class="p">:</span> <span class="n">expire</span><span class="p">})</span>
+    <span class="n">encoded_jwt</span> <span class="o">=</span> <span class="n">jwt</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">to_encode</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">ALGORITHM</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">encoded_jwt</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_current_user</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">oauth2_scheme</span><span class="p">)):</span>
+    <span class="n">credentials_exception</span> <span class="o">=</span> <span class="n">HTTPException</span><span class="p">(</span>
+        <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="p">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
+        <span class="n">detail</span><span class="o">=</span><span class="s">"Could not validate credentials"</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"WWW-Authenticate"</span><span class="p">:</span> <span class="s">"Bearer"</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">jwt</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">,</span> <span class="n">algorithms</span><span class="o">=</span><span class="p">[</span><span class="n">ALGORITHM</span><span class="p">])</span>
+        <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">payload</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"sub"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">credentials_exception</span>
+        <span class="n">token_data</span> <span class="o">=</span> <span class="n">TokenData</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">JWTError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">credentials_exception</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_user</span><span class="p">(</span><span class="n">fake_users_db</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">token_data</span><span class="p">.</span><span class="n">username</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">credentials_exception</span>
+    <span class="k">return</span> <span class="n">user</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_current_active_user</span><span class="p">(</span><span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">current_user</span><span class="p">.</span><span class="n">disabled</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s">"Inactive user"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">current_user</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"/token"</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">Token</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">login_for_access_token</span><span class="p">(</span><span class="n">form_data</span><span class="p">:</span> <span class="n">OAuth2PasswordRequestForm</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">()):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">fake_users_db</span><span class="p">,</span> <span class="n">form_data</span><span class="p">.</span><span class="n">username</span><span class="p">,</span> <span class="n">form_data</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="p">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
+            <span class="n">detail</span><span class="o">=</span><span class="s">"Incorrect username or password"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"WWW-Authenticate"</span><span class="p">:</span> <span class="s">"Bearer"</span><span class="p">},</span>
+        <span class="p">)</span>
+    <span class="n">access_token_expires</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="p">)</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">"sub"</span><span class="p">:</span> <span class="n">user</span><span class="p">.</span><span class="n">username</span><span class="p">},</span> <span class="n">expires_delta</span><span class="o">=</span><span class="n">access_token_expires</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">"access_token"</span><span class="p">:</span> <span class="n">access_token</span><span class="p">,</span> <span class="s">"token_type"</span><span class="p">:</span> <span class="s">"bearer"</span><span class="p">}</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/users/me/"</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">User</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_users_me</span><span class="p">(</span><span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_active_user</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">current_user</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/users/me/items/"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">read_own_items</span><span class="p">(</span><span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_active_user</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="p">[{</span><span class="s">"item_id"</span><span class="p">:</span> <span class="s">"Foo"</span><span class="p">,</span> <span class="s">"owner"</span><span class="p">:</span> <span class="n">current_user</span><span class="p">.</span><span class="n">username</span><span class="p">}]</span>
+</code></pre></div></div>
+
+<h2 id="testing-your-api">Testing Your API</h2>
+
+<p>FastAPI makes it easy to test your API using the <code class="language-plaintext highlighter-rouge">TestClient</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">fastapi.testclient</span> <span class="kn">import</span> <span class="n">TestClient</span>
+<span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_read_main</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s">"message"</span><span class="p">:</span> <span class="s">"Welcome to FastAPI!"</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">test_read_item</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/items/42?q=test"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s">"item_id"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s">"q"</span><span class="p">:</span> <span class="s">"test"</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>To deploy your FastAPI application, you can use Uvicorn with a process manager like Gunicorn:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Gunicorn</span>
+pip <span class="nb">install </span>gunicorn
+
+<span class="c"># Run with Gunicorn (for production)</span>
+gunicorn <span class="nt">-w</span> 4 <span class="nt">-k</span> uvicorn.workers.UvicornWorker main:app
+</code></pre></div></div>
+
+<p>For containerized deployment with Docker, create a <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> python:3.9</span>
+
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+
+<span class="k">COPY</span><span class="s"> requirements.txt .</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="nt">-r</span> requirements.txt
+
+<span class="k">COPY</span><span class="s"> . .</span>
+
+<span class="k">CMD</span><span class="s"> ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]</span>
+</code></pre></div></div>
+
+<p>And a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8000"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">DATABASE_URL=sqlite:///./test.db</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/app</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>FastAPI is a powerful and modern framework for building APIs with Python. Its performance, automatic documentation, and type checking make it an excellent choice for both small and large projects. With its intuitive design and extensive features, you can quickly build robust and scalable APIs.</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<ul>
+  <li>Explore more advanced features in the <a href="https://fastapi.tiangolo.com/">FastAPI documentation</a></li>
+  <li>Learn about <a href="https://fastapi.tiangolo.com/async/">async/await in FastAPI</a></li>
+  <li>Check out the <a href="https://fastapi.tiangolo.com/deployment/">FastAPI deployment documentation</a></li>
+</ul>
+
+<p>Happy coding! 🚀</p>
+
+<hr />
+
+<p><em>This article was originally published on <a href="https://mohsinqureshi.com">my blog</a>. Follow me on <a href="https://twitter.com/yourusername">Twitter</a> for more content like this!</em></p>]]></content><author><name></name></author><category term="Web Development" /><category term="Python" /><category term="APIs" /><category term="fastapi" /><category term="python" /><category term="web development" /><category term="api" /><category term="backend" /><summary type="html"><![CDATA[A comprehensive guide to getting started with FastAPI, a modern, fast web framework for building APIs with Python 3.7+.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/blog/fastapi-cover.jpg" /><media:content medium="image" url="http://localhost:4000/assets/images/blog/fastapi-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -1,0 +1,160 @@
+---
+layout: page
+title: Blog
+description: Thoughts, tutorials, and insights on technology, programming, and more.
+---
+
+<div class="blog-container">
+  <div class="blog-header">
+    <h1>Latest Articles</h1>
+    <p class="lead">Sharing knowledge, experiences, and thoughts on technology and beyond.</p>
+    
+    <div class="blog-filters">
+      <div class="filter-group">
+        <span class="filter-label">Category:</span>
+        <div class="filter-tags">
+          <a href="#" class="tag tag-primary">All</a>
+          <a href="#" class="tag">Tutorials</a>
+          <a href="#" class="tag">Web Development</a>
+          <a href="#" class="tag">Data Science</a>
+          <a href="#" class="tag">Programming</a>
+          <a href="#" class="tag">Technology</a>
+        </div>
+      </div>
+      
+      <div class="search-box">
+        <input type="text" placeholder="Search articles..." class="form-control">
+        <button class="btn btn-outline">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-posts">
+    {% for post in site.posts limit:5 %}
+      <article class="blog-post-card">
+        <div class="post-image">
+          <a href="{{ post.url }}">
+            <img src="{{ post.image | default: '/assets/images/blog/default-thumbnail.jpg' }}" alt="{{ post.title }}">
+          </a>
+          <div class="post-category">
+            <a href="/blog/category/{{ post.categories[0] | slugify }}/">{{ post.categories[0] | default: 'General' }}</a>
+          </div>
+        </div>
+        
+        <div class="post-content">
+          <div class="post-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%B %-d, %Y" }}
+            </time>
+            <span class="reading-time">
+              {% assign words = post.content | number_of_words %}
+              {% if words < 360 %}
+                1 min read
+              {% else %}
+                {{ words | divided_by:180 }} min read
+              {% endif %}
+            </span>
+          </div>
+          
+          <h2 class="post-title">
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </h2>
+          
+          <p class="post-excerpt">
+            {{ post.excerpt | strip_html | truncatewords: 30 }}
+          </p>
+          
+          <div class="post-footer">
+            <div class="post-tags">
+              {% for tag in post.tags limit:3 %}
+                <a href="/blog/tag/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+              {% endfor %}
+            </div>
+            <a href="{{ post.url }}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    {% else %}
+      <div class="no-posts">
+        <p>No blog posts found. Check back soon for updates!</p>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <div class="pagination">
+    <a href="/blog/page2/" class="btn btn-outline">Older Posts</a>
+    <span class="page-number">Page 1 of 3</span>
+  </div>
+  
+  <div class="newsletter-cta">
+    <div class="newsletter-content">
+      <h3>Subscribe to my newsletter</h3>
+      <p>Get the latest posts and updates delivered to your inbox.</p>
+    </div>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Your email address" class="form-control" required>
+      <button type="submit" class="btn">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<aside class="blog-sidebar">
+  <div class="sidebar-widget">
+    <h3 class="widget-title">About Me</h3>
+    <div class="author-bio">
+      <img src="/assets/images/author.jpg" alt="Mohsin Qureshi" class="author-image">
+      <p>Hi, I'm Mohsin. I write about technology, programming, and my experiences in software development.</p>
+      <a href="/about/" class="btn btn-small btn-outline">Read More</a>
+    </div>
+  </div>
+  
+  <div class="sidebar-widget">
+    <h3 class="widget-title">Popular Tags</h3>
+    <div class="tag-cloud">
+      <a href="#" class="tag">Python</a>
+      <a href="#" class="tag">JavaScript</a>
+      <a href="#" class="tag">Web Development</a>
+      <a href="#" class="tag">Data Science</a>
+      <a href="#" class="tag">API</a>
+      <a href="#" class="tag">Docker</a>
+      <a href="#" class="tag">Git</a>
+      <a href="#" class="tag">Linux</a>
+    </div>
+  </div>
+  
+  <div class="sidebar-widget">
+    <h3 class="widget-title">Featured Posts</h3>
+    <ul class="featured-posts">
+      <li>
+        <a href="#">Getting Started with FastAPI</a>
+        <span class="post-date">May 15, 2023</span>
+      </li>
+      <li>
+        <a href="#">Data Synchronization Patterns</a>
+        <span class="post-date">April 2, 2023</span>
+      </li>
+      <li>
+        <a href="#">Building Scalable Microservices</a>
+        <span class="post-date">March 18, 2023</span>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="sidebar-widget">
+    <h3 class="widget-title">Follow Me</h3>
+    <div class="social-links">
+      <a href="https://github.com/mohsin0803" target="_blank" class="social-link" title="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://twitter.com/yourusername" target="_blank" class="social-link" title="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-link" title="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="/rss.xml" class="social-link" title="RSS Feed">
+        <i class="fas fa-rss"></i>
+      </a>
+    </div>
+  </div>
+</aside>

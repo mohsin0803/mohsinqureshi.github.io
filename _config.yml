@@ -1,0 +1,41 @@
+# Site settings
+title: Mohsin Qureshi
+email: me@mohsinqureshi.ca
+description: >- # this means to ignore newlines until "baseurl:"
+  Welcome to my personal website. I write about technology, share my projects, and more.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://mohsinqureshi.github.io" # the base hostname & protocol for your site
+
+twitter_username: yourtwitter
+github_username:  mohsin0803
+google_analytics: UA-XXXXX-X
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+theme: minima
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor
+
+timezone: America/New_York
+
+# Navigation
+nav_links:
+  - title: About
+    url: /
+  - title: Projects
+    url: /projects/
+  - title: Blog
+    url: /blog/
+  - title: Publications
+    url: /publications/
