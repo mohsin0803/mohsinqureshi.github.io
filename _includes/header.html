@@ -1,9 +1,25 @@
 <header class="site-header" role="banner">
+  <div class="social-header">
+    <a href="https://github.com/{{ site.github_username| cgi_escape | escape }}" target="_blank" class="btn social">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/{{ site.linkedin_username| cgi_escape | escape }}" target="_blank" class="btn social">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="https://twitter.com/{{ site.twitter_username | cgi_escape | escape }}" target="_blank" class="btn social" aria-label="Twitter/X">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 122" width="20" height="20" fill="currentColor">
+        <path d="M74.16 50.6 117.06 0H106.4L69.12 43.84 39.2 0H0l45.84 66.88L0 122h10.64l39.12-46.4L81.6 122h39.2L74.16 50.6ZM56.56 68.96l-4.56-6.48L14.4 7.84H34l25.6 36.4 4.56 6.56 40.48 57.6H85.44l-28.88-39.44Z"/>
+      </svg>
+    </a>
+    <a href="https://scholar.google.ca/citations?user={{ site.google_scholar_id| cgi_escape | escape }}&hl=en" target="_blank" class="btn social">
+      <i class="fas fa-graduation-cap"></i>
+    </a>    
+    <a href="mailto:me@mohsinqureshi.ca" class="btn social">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
+  
   <div class="wrapper">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
-
     <nav class="site-nav">
       <input type="checkbox" id="nav-trigger" class="nav-trigger" />
       <label for="nav-trigger">
@@ -16,9 +32,7 @@
 
       <div class="trigger">
         {%- for link in site.nav_links -%}
-          {%- if link.title -%}
-            <a class="page-link" href="{{ link.url | relative_url }}">{{ link.title | escape }}</a>
-          {%- endif -%}
+          <a class="page-link" href="{{ link.url | relative_url }}">{{ link.title | escape }}</a>
         {%- endfor -%}
       </div>
     </nav>

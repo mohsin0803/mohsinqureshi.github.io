@@ -7,3 +7,112 @@
 @import "layout";
 @import "components";
 @import "syntax-highlighting";
+
+footer {
+  text-align: center;      /* centers the paragraph */
+  padding: 1rem 0;         /* some vertical spacing */
+  color: #666;             /* lighter text color */
+  font-size: 0.9rem;
+  background-color: #f9f9f9; /* optional light background */
+  margin-top: 3rem;
+}
+
+
+.site-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  background-color: #24c92c; /* or your preferred background */
+  color: white;
+}
+
+/* Social icons container */
+.social-header {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* Site title and nav wrapper */
+.site-header > .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-grow: 1;
+  justify-content: space-between;
+  min-width: 200px;
+}
+
+/* Site title */
+.site-title {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+/* Navigation styles */
+.site-nav {
+  flex-shrink: 0;
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .social-header {
+    order: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .site-header > .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    order: 2;
+    gap: 0.5rem;
+  }
+
+  .site-nav {
+    width: 100%;
+  }
+}
+
+.social-header {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn.social {
+  background: transparent;
+  color: #000000;
+  font-size: 1.2rem;
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+
+  i {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &:hover {
+    color: #ddd;
+  }
+}
+
+
+  
+  

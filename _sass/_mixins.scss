@@ -1,0 +1,13 @@
+// _sass/_mixins.scss
+// Add this test rule at the top
+.test-mixin-working {
+    color: green;
+  }
+  
+  $on-laptop: 1024px !default;
+  
+  @mixin media-query($breakpoint) {
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  }
