@@ -48,7 +48,7 @@ form:
         </div>
         <div class="contact-details">
           <h3>LinkedIn</h3>
-          <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+          <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank">linkedin.com/in/{{ site.linkedin_username }}</a>
         </div>
       </div>
       
@@ -58,7 +58,7 @@ form:
         </div>
         <div class="contact-details">
           <h3>GitHub</h3>
-          <a href="https://github.com/mohsin0803" target="_blank">github.com/mohsin0803</a>
+          <a href="https://github.com/{{ site.github_username }}" target="_blank">github.com/{{ site.github_username }}</a>
         </div>
       </div>
       
@@ -68,7 +68,7 @@ form:
         </div>
         <div class="contact-details">
           <h3>Twitter</h3>
-          <a href="https://twitter.com/yourusername" target="_blank">@yourusername</a>
+          <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank">@{{ site.twitter_username }}</a>
         </div>
       </div>
     </div>
@@ -116,33 +116,5 @@ form:
         </button>
       </div>
     </form>
-    
-    <div class="form-note">
-      <p><small>By submitting this form, you agree to our <a href="/privacy-policy/">Privacy Policy</a>.</small></p>
-    </div>
-  </div>
-</div>
-
-<div class="faq-section">
-  <h2>Frequently Asked Questions</h2>
-  
-  <div class="faq-item">
-    <h3>How soon can I expect a response?</h3>
-    <p>I typically respond to all inquiries within 24-48 hours during business days. If you haven't heard back within that time, please check your spam folder or try reaching out through another channel.</p>
-  </div>
-  
-  <div class="faq-item">
-    <h3>Do you offer freelance/consulting services?</h3>
-    <p>Yes, I'm available for select freelance and consulting projects. Please provide details about your project in your message, and I'll let you know if I can help.</p>
-  </div>
-  
-  <div class="faq-item">
-    <h3>Can I schedule a meeting or call?</h3>
-    <p>Absolutely! Once you send me a message, I'll respond with my availability to schedule a call or video meeting at a time that works for both of us.</p>
-  </div>
-  
-  <div class="faq-item">
-    <h3>Do you speak at conferences or events?</h3>
-    <p>I'm always open to speaking opportunities. Please provide details about your event, including the topic, audience, and expected date, and I'll get back to you with my availability.</p>
   </div>
 </div>

@@ -19,10 +19,9 @@ description: "Thank you for reaching out! I'll get back to you as soon as possib
       <h3>What's Next?</h3>
       <p>While you wait for my response, you might want to:</p>
       <ul>
-        <li>📚 Read my latest <a href="/blog/">blog posts</a></li>
-        <li>💼 Check out my <a href="/projects/">projects</a></li>
-        <li>🐦 Follow me on <a href="https://twitter.com/yourusername" target="_blank">Twitter</a> for updates</li>
-        <li>💻 Explore my open-source contributions on <a href="https://github.com/mohsin0803" target="_blank">GitHub</a></li>
+        <li>📖 Read my latest <a href="/blog/">blog posts</a></li>
+        <li>🐦 Follow me on <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank">Twitter</a> for updates</li>
+        <li>💻 Explore my open-source contributions on <a href="https://github.com/{{ site.github_username }}" target="_blank">GitHub</a></li>
       </ul>
     </div>
     

@@ -11,21 +11,21 @@ layout: default
         </div>
         <!-- Social Media Buttons -->
         <div class="social-buttons">
-          <a href="https://github.com/{{ site.github_username }}" target="_blank" class="btn social" aria-label="GitHub">
+          <a href="https://github.com/{{ site.github_username }}" target="_blank" class="btn social" data-tooltip="GitHub: {{ site.github_username }}">
             <i class="fab fa-github"></i>
           </a>
-          <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" class="btn social" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" class="btn social" data-tooltip="LinkedIn: {{ site.linkedin_username }}">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" class="btn social" aria-label="Twitter/X">
+          <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" class="btn social" data-tooltip="Twitter: @{{ site.twitter_username }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 122" width="18" height="18" fill="currentColor" style="vertical-align: middle;">
               <path d="M74.16 50.6 117.06 0H106.4L69.12 43.84 39.2 0H0l45.84 66.88L0 122h10.64l39.12-46.4L81.6 122h39.2L74.16 50.6ZM56.56 68.96l-4.56-6.48L14.4 7.84H34l25.6 36.4 4.56 6.56 40.48 57.6H85.44l-28.88-39.44Z"/>
             </svg>
           </a>
-          <a href="https://scholar.google.ca/citations?user={{ site.google_scholar_id }}&hl=en" target="_blank" class="btn social" aria-label="Google Scholar">
+          <a href="https://scholar.google.ca/citations?user={{ site.google_scholar_id }}&hl=en" target="_blank" class="btn social" data-tooltip="Google Scholar">
             <i class="fas fa-graduation-cap"></i>
           </a>
-          <a href="mailto:me@mohsinqureshi.ca" class="btn social" aria-label="Email">
+          <a href="mailto:me@mohsinqureshi.ca" class="btn social" data-tooltip="Email: me@mohsinqureshi.ca">
             <i class="fas fa-envelope"></i>
           </a>
         </div>
@@ -49,6 +49,37 @@ layout: default
       </p>
     </section>
 
+    <section class="projects">
+      <h2>Featured Projects</h2>
+      <div class="project-card">
+        <a href="/projects/stocksync/" class="project-image-link">
+          <img src="/assets/images/projects/stocksync.png" alt="StockSync Project" class="project-image">
+        </a>
+        <div class="project-content">
+          <h3>StockSync</h3>
+          <p>FastAPI app for syncing stock data</p>
+          <div class="tech-stack">
+            <span>FastAPI</span>
+            <span>Python</span>
+            <span>PostgreSQL</span>
+          </div>
+        </div>
+      <div class="project-card">
+          <a href="/projects/aiimmigra/" class="project-image-link">
+            <img src="/assets/images/projects/aiimmigra.png" alt="AI Immigra Project" class="project-image">
+          </a>
+          <div class="project-content">
+            <h3>AI Immigra</h3>
+            <p>FastAPI app for syncing stock data between Omni & EL</p>
+            <div class="tech-stack">
+              <span>FastAPI</span>
+              <span>Python</span>
+              <span>PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+    </section>
+
     <section class="experience">
       <h2>Education</h2>
       <div class="timeline">
@@ -57,8 +88,8 @@ layout: default
           <div class="timeline-content">
             <h3>Doctor of Philosophy (Ph.D.)</h3>
             <div class="timeline-meta">
-              <span class="company">Gwangju Institute of Science and Technology, South Korea</span>
-              <span class="date">September 2016 – August 2021</span>
+              <div class="company"><strong>Gwangju Institute of Science and Technology, South Korea</strong></div>
+              <div class="date">September 2016 – August 2021</div>
             </div>
             <p>Leading machine learning initiatives and developing data pipelines for enterprise clients. Spearheaded the development of a recommendation system that improved user engagement by 35%.</p>
           </div>
@@ -68,8 +99,8 @@ layout: default
           <div class="timeline-content">
             <h3>Masters of Engineering (MEng)</h3>
             <div class="timeline-meta">
-              <span class="company">Chosun University of Technology, South Korea</span>
-              <span class="date">March 2021 – August 2016</span>
+              <div class="company"><strong>Chosun University of Technology, South Korea</strong></div>
+              <div class="date">March 2016 – August 2016</div>
             </div>
             <p>Designed and implemented scalable data pipelines processing 1M+ records daily. Optimized ETL processes, reducing processing time by 60%.</p>
           </div>
@@ -117,62 +148,16 @@ layout: default
     
 
 
-    <section class="highlights">
-      <div class="highlight-card">
-        <i class="fas fa-code"></i>
-        <h3>Clean Code</h3>
-        <p>Writing maintainable and efficient code with best practices.</p>
-      </div>
-      <div class="highlight-card">
-        <i class="fas fa-chart-line"></i>
-        <h3>Data Analysis</h3>
-        <p>Transforming raw data into meaningful insights.</p>
-      </div>
-      <div class="highlight-card">
-        <i class="fas fa-project-diagram"></i>
-        <h3>Projects</h3>
-        <p>Building practical solutions to real-world problems.</p>
-      </div>
-    </section>
+    
 
-    <section class="projects">
-      <h2>Featured Projects</h2>
-      <div class="project-grid">
-        <div class="project-card">
-          <h3>StockSync</h3>
-          <p>FastAPI app for syncing stock data between Omni & EL</p>
-          <div class="tech-stack">
-            <span>FastAPI</span>
-            <span>Python</span>
-            <span>PostgreSQL</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <h3>KlaviyoSync</h3>
-          <p>Customer & Product sync integration with Klaviyo</p>
-          <div class="tech-stack">
-            <span>Python</span>
-            <span>REST API</span>
-            <span>Webhooks</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <h3>ZohoBridge</h3>
-          <p>Django app for posting data to Zoho Inventory API</p>
-          <div class="tech-stack">
-            <span>Django</span>
-            <span>Zoho API</span>
-            <span>OAuth2</span>
-          </div>
-        </div>
-      </div>
-      <div class="text-center">
-        <a href="/projects/" class="btn">View All Projects</a>
-      </div>
-    </section>
+    <div style="text-align: center; margin: 3rem 0 5rem;">
+      <a href="/contact/" class="btn" style="display: inline-block; padding: 0.8rem 2rem; font-size: 1.1rem; background-color: #4a90e2; color: white; text-decoration: none; border-radius: 4px; transition: background-color 0.3s ease;">
+        Contact Me
+      </a>
+    </div>
 
   </div>
 </main>
 
 <!-- The footer is now included via _includes/footer.html in the default layout -->
-{{ content }}
+

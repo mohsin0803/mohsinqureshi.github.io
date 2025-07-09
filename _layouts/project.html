@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<article class="project-article">
+  <header class="project-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.image %}
+    <div class="project-image">
+      <img src="{{ page.image }}" alt="{{ page.title }}">
+    </div>
+    {% endif %}
+    <div class="project-meta">
+      {% if page.github %}
+      <a href="https://github.com/{{ page.github }}" target="_blank" class="btn">
+        <i class="fab fa-github"></i> View on GitHub
+      </a>
+      {% endif %}
+      {% if page.live_demo %}
+      <a href="{{ page.live_demo }}" target="_blank" class="btn btn-primary">
+        <i class="fas fa-external-link-alt"></i> Live Demo
+      </a>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="project-content">
+    {{ content }}
+  </div>
+</article>
