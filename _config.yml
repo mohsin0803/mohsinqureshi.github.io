@@ -29,12 +29,3 @@ theme: minima
 #   - vendor
 
 timezone: America/New_York
-
-# Navigation
-nav_links:
-  - title: About
-    url: /
-  - title: Projects
-    url: /projects/
-  - title: Publications
-    url: /publications/

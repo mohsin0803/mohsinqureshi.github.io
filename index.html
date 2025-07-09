@@ -5,8 +5,30 @@ layout: default
 <header class="hero">
   <div class="container">
     <div class="profile-container">
-      <div class="profile-image">
-        <img src="/assets/images/profile.jpg" alt="Mohsin Qureshi">
+      <div class="profile-image-container">
+        <div class="profile-image">
+          <img src="/assets/images/profile.jpg" alt="Mohsin Qureshi">
+        </div>
+        <!-- Social Media Buttons -->
+        <div class="social-buttons">
+          <a href="https://github.com/{{ site.github_username }}" target="_blank" class="btn social" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" class="btn social" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" class="btn social" aria-label="Twitter/X">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 122" width="18" height="18" fill="currentColor" style="vertical-align: middle;">
+              <path d="M74.16 50.6 117.06 0H106.4L69.12 43.84 39.2 0H0l45.84 66.88L0 122h10.64l39.12-46.4L81.6 122h39.2L74.16 50.6ZM56.56 68.96l-4.56-6.48L14.4 7.84H34l25.6 36.4 4.56 6.56 40.48 57.6H85.44l-28.88-39.44Z"/>
+            </svg>
+          </a>
+          <a href="https://scholar.google.ca/citations?user={{ site.google_scholar_id }}&hl=en" target="_blank" class="btn social" aria-label="Google Scholar">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+          <a href="mailto:me@mohsinqureshi.ca" class="btn social" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
       </div>
       <div class="profile-text">
         <h1>Dr. Muhammad Mohsin Qureshi</h1>
@@ -149,39 +171,8 @@ layout: default
       </div>
     </section>
 
-    <section class="blog-preview">
-      <h2>Latest Blog Posts</h2>
-      <div class="post-list">
-        {% for post in site.posts limit:3 %}
-          <article class="post-card">
-            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <div class="post-meta">
-              <time datetime="{{ post.date | date_to_xmlschema }}">
-                {{ post.date | date: "%B %-d, %Y" }}
-              </time>
-              <span class="reading-time">
-                {% assign words = post.content | number_of_words %}
-                {% if words < 360 %}
-                  1 min read
-                {% else %}
-                  {{ words | divided_by:180 }} min read
-                {% endif %}
-              </span>
-            </div>
-            <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-            <a href="{{ post.url }}" class="read-more">Read more →</a>
-          </article>
-        {% endfor %}
-      </div>
-      <div class="text-center">
-        <a href="/blog/" class="btn">View All Posts</a>
-      </div>
-    </section>
   </div>
 </main>
 
-<footer>
-  <p>&copy; {{ 'now' | date: "%Y" }} Mohsin Qureshi. All rights reserved.</p>
-</footer>
-</body>
-</html>
+<!-- The footer is now included via _includes/footer.html in the default layout -->
+{{ content }}
